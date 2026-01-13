@@ -7,14 +7,20 @@ const cors_origin = process.env.CORS_ORIGIN
 const app = express()
 
 app.use(cors({
-    origin: cors_origin, 
+    origin: cors_origin,
     credentials: true
 }))
 
-app.use(express.json({limits: "16kb"}))
-app.use(express.urlencoded({extended:true, limit:"16kb"}))
+app.use(express.json({ limits: "16kb" }))
+app.use(express.urlencoded({ extended: true, limit: "16kb" }))
 app.use(express.static("public"))
 app.use(cookieParser())
 
+//routes import 
 
-export {app};
+import userRouter from './routes/user.routes.js'
+
+//routes declaration
+app.use("/api/v1/users", userRouter)
+
+export { app }; 
